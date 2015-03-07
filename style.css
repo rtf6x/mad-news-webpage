@@ -1,0 +1,43 @@
+body {margin:0; padding:0;}
+
+.stage {
+    background: #000;
+    color: #fff;
+    font-family: Arial Black, Gadget, sans-serif;
+    font-size: 24px;
+    font-weight: normal;
+    left: 679px;
+    padding: 5px 15px;
+    position: absolute;
+}
+
+#stage_a0 {
+    top: 288px;
+}
+
+#stage_b0 {
+    top: 340px;
+}
+
+#stage_c0 {
+    top: 393px;
+}
+
+#stage_refresh {
+    position: absolute;
+    left: 679px;
+    top: 446px;
+}
+
+#stage_refresh a {
+    background: url('./images/refresh.jpg') no-repeat scroll left top transparent;
+    background-size: 42px 42px;
+    display: block;
+    width: 42px;
+    height: 42px;
+}
+
+#stage_refresh a:hover {
+    background: url('./images/refresh2.jpg') no-repeat scroll left top transparent;
+    background-size: 42px 42px;
+}
