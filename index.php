@@ -1,8 +1,9 @@
 <?php
 
-class madnews {
+class MadNews {
   private $sex;
   private $seed;
+
   private $predict = array(
     array('message' => 'ВОДИТЕЛЬ КАМАЗА', 'sex' => 'm'),
     array('message' => 'ЖИТЕЛЬ ВЛАДИМИРСКОЙ ОБЛАСТИ', 'sex' => 'm'),
@@ -20,7 +21,12 @@ class madnews {
     array('message' => 'Депутат Братска', 'sex' => 'm'),
     array('message' => 'Группа томичей', 'sex' => 'plural'),
     array('message' => 'В Волгограде двое чеченцев', 'sex' => 'plural'),
+    array('message' => 'В Ульяновске изготовитель гашиша', 'sex' => 'm'),
+    array('message' => 'Пенсионер', 'sex' => 'm'),
+    array('message' => 'Омичи', 'sex' => 'plural'),
+    array('message' => 'В Казахстане четыре студентки', 'sex' => 'plural'),
   );
+
   private $action = array(
     'm' => array(
       'ХОТЕЛ НАПУГАТЬ ЖЕНУ',
@@ -34,7 +40,10 @@ class madnews {
       'ПОДЖЕГ СВОИ ДОКУМЕНТЫ',
       'заподозрил соседей в заговоре против него',
       'взял в заложницы тещу',
-      'вломился в чужой дом'
+      'вломился в чужой дом',
+      'ограбил автомат с игрушками',
+      'изнасиловал кондитера',
+      'взорвал беседку с молодежью'
     ),
     'f' => array(
       'ХОТЕЛа НАПУГАТЬ мужа',
@@ -48,7 +57,9 @@ class madnews {
       'ПОДожгла СВОИ ДОКУМЕНТЫ',
       'заподозрила соседей в заговоре против нее',
       'взяла в заложницы тещу',
-      'вломилась в чужой дом'
+      'вломилась в чужой дом',
+      'ограбила автомат с игрушками',
+      'взорвала беседку с молодежью'
     ),
     'plural' => array(
       'УГНАЛи ПОЕЗД',
@@ -58,10 +69,14 @@ class madnews {
       'РАЗВЕЛи КОСТЕР В МЕТРО',
       'ПОДожгли СВОИ ДОКУМЕНТЫ',
       'заподозрили соседей в заговоре против них',
-      'вломились в чужой дом'
+      'вломились в чужой дом',
+      'ограбили автомат с игрушками',
+      'изнасиловали кондитера',
+      'взорвали беседку с молодежью',
+      'пытались покончить с собой',
     ),
-    
   );
+
   private $conclusion = array(
     'm' => array(
       'И ПРИ ЭТОМ СМЕЯЛСЯ',
@@ -88,6 +103,7 @@ class madnews {
       'ЧТОБЫ СОГРЕТЬСЯ',
     ),
   );
+
   public function getNew($stage) {
     switch ($stage) {
       case 1:
@@ -96,6 +112,8 @@ class madnews {
         return mb_strtoupper($this->action[$this->sex][array_rand($this->action[$this->sex])], 'utf-8');
       case 3:
         return mb_strtoupper($this->conclusion[$this->sex][array_rand($this->conclusion[$this->sex])], 'utf-8');
+      default:
+        return 'И УМЕР';
     }
   }
 
@@ -105,7 +123,7 @@ class madnews {
   }
 }
 
-$mad = new madnews();
+$mad = new MadNews();
 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html><head>
