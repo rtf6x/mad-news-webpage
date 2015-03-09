@@ -19,7 +19,7 @@ class MadNews {
     array('message' => 'Омская полиция', 'sex' => 'f'),
     array('message' => 'Омич, стрелявший в прохожих из окна', 'sex' => 'm'),
     array('message' => 'Депутат Братска', 'sex' => 'm'),
-    array('message' => 'Группа томичей', 'sex' => 'plural'),
+    array('message' => 'Группа томичей', 'sex' => 'f'),
     array('message' => 'В Волгограде двое чеченцев', 'sex' => 'plural'),
     array('message' => 'В Ульяновске изготовитель гашиша', 'sex' => 'm'),
     array('message' => 'Пенсионер', 'sex' => 'm'),
@@ -107,11 +107,11 @@ class MadNews {
   public function getNew($stage) {
     switch ($stage) {
       case 1:
-        return mb_strtoupper($this->predict[$this->seed]['message'], 'utf-8');
+        return $this->predict[$this->seed]['message'];
       case 2:
-        return mb_strtoupper($this->action[$this->sex][array_rand($this->action[$this->sex])], 'utf-8');
+        return $this->action[$this->sex][array_rand($this->action[$this->sex])];
       case 3:
-        return mb_strtoupper($this->conclusion[$this->sex][array_rand($this->conclusion[$this->sex])], 'utf-8');
+        return $this->conclusion[$this->sex][array_rand($this->conclusion[$this->sex])];
       default:
         return 'И УМЕР';
     }
@@ -141,11 +141,10 @@ $mad = new MadNews();
 <div class="center-wrapper">
   <div id="stage">
 
-    <div id="stage_c0" class="stage"><?php print $mad->getNew(3); ?></div>
-    <div id="stage_b0" class="stage"><?php print $mad->getNew(2); ?></div>
-    <div id="stage_a0" class="stage"><?php print $mad->getNew(1); ?></div>
-
-    <div id="stage_refresh"><a href="/madnews/"></a></div>
+    <div id="stage_a0" class="stage"><p><?php print $mad->getNew(1); ?></p></div>
+    <div id="stage_b0" class="stage"><p><?php print $mad->getNew(2); ?></p></div>
+    <div id="stage_c0" class="stage"><p><?php print $mad->getNew(3); ?></p></div>
+    <div id="stage_refresh" class="stage"><a href="/madnews/"></a></div>
 
   </div>
 </div>
