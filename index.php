@@ -107,11 +107,11 @@ class MadNews {
   public function getNew($stage) {
     switch ($stage) {
       case 1:
-        return $this->predict[$this->seed]['message'];
+        return mb_strtoupper($this->predict[$this->seed]['message'], 'utf-8');
       case 2:
-        return $this->action[$this->sex][array_rand($this->action[$this->sex])];
+        return mb_strtoupper($this->action[$this->sex][array_rand($this->action[$this->sex])], 'utf-8');
       case 3:
-        return $this->conclusion[$this->sex][array_rand($this->conclusion[$this->sex])];
+        return mb_strtoupper($this->conclusion[$this->sex][array_rand($this->conclusion[$this->sex])], 'utf-8');
       default:
         return 'И УМЕР';
     }
