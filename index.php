@@ -4,40 +4,9 @@ class MadNews {
   private $sex;
   private $seed;
 
-  private $predict = array(
-    array('message' => 'Водитель {камаза|белаза|мусоровоза}', 'sex' => 'm'),
-    array('message' => 'Житель Владимирской области', 'sex' => 'm'),
-    array('message' => 'Житель {Хабаровска|Бобруйска|Мурманска|Калининграда}', 'sex' => 'm'),
-    array('message' => 'Мужчина из Саратова', 'sex' => 'm'),
-    array('message' => 'Череповчанин', 'sex' => 'm'),
-    array('message' => 'Мужчина в Челябинске', 'sex' => 'm'),
-    array('message' => 'Кемеровчанин', 'sex' => 'm'),
-    array('message' => 'Председатель колхоза', 'sex' => 'm'),
-    array('message' => 'Водитель мусоровоза', 'sex' => 'm'),
-    array('message' => 'Сантехник из Иваново', 'sex' => 'm'),
-    array('message' => 'Наркоман из Ульяновска', 'sex' => 'm'),
-    array('message' => 'Пенсионер', 'sex' => 'm'),
-    array('message' => 'Пивовар из Бурятии', 'sex' => 'm'),
-    array('message' => 'Водитель скорой помощи', 'sex' => 'm'),
-    array('message' => 'Житель Кузбасса', 'sex' => 'm'),
-    array('message' => 'Житель Ярославской области', 'sex' => 'm'),
-    array('message' => 'Селянин', 'sex' => 'm'),
-    array('message' => 'Депутат Братска', 'sex' => 'm'),
-    array('message' => 'Омич, стрелявший в прохожих из окна', 'sex' => 'm'),
-    array('message' => 'Водитель буксира в Петербурге', 'sex' => 'm'),
-    array('message' => 'Доярка из Амурской области', 'sex' => 'f'),
-    array('message' => 'Журналистка Комсомольской правды', 'sex' => 'f'),
-    array('message' => 'Уборщица ночного клуба', 'sex' => 'f'),
-    array('message' => 'Полицейские из Омска', 'sex' => 'plural'),
-    array('message' => 'Группа Томичей', 'sex' => 'plural'),
-    array('message' => 'Две проститутки из подмосковья', 'sex' => 'plural'),
-    array('message' => 'Два студента филфака МГУ', 'sex' => 'plural'),
-    array('message' => 'Группа молодых людей из Бурятии', 'sex' => 'plural'),
-    array('message' => 'Омичи', 'sex' => 'plural'),
-    array('message' => 'В Волгограде двое Чеченцев', 'sex' => 'plural'),
-    array('message' => 'В Казахстане четыре студентки', 'sex' => 'plural'),
-    array('message' => 'Двое жителей Ставрополья', 'sex' => 'plural'),
-  );
+	private $place_genitive = '{Ярославской области|Кузбасса|Саратова|Иваново|Ульяновска|Бурятии|Владимирской области|Хабаровска|Бобруйска|Мурманска|Калининграда}';
+
+  private $predict;
 
   private $action = array(
     'm' => array(
@@ -178,8 +147,41 @@ class MadNews {
   }
 
   public function __construct() {
+    $this->predict = array(
+	    array('message' => 'Водитель {камаза|белаза|мусоровоза}', 'sex' => 'm'),
+	    array('message' => 'Житель ' . $this->place_genitive, 'sex' => 'm'),
+	    array('message' => 'Мужчина из ' . $this->place_genitive, 'sex' => 'm'),
+	    array('message' => 'Череповчанин', 'sex' => 'm'),
+	    array('message' => 'Мужчина в Челябинске', 'sex' => 'm'),
+	    array('message' => 'Кемеровчанин', 'sex' => 'm'),
+	    array('message' => 'Председатель колхоза', 'sex' => 'm'),
+	    array('message' => 'Водитель мусоровоза', 'sex' => 'm'),
+	    array('message' => 'Сантехник из ' . $this->place_genitive, 'sex' => 'm'),
+	    array('message' => 'Наркоман из ' . $this->place_genitive, 'sex' => 'm'),
+	    array('message' => 'Пенсионер', 'sex' => 'm'),
+	    array('message' => 'Пивовар из ' . $this->place_genitive, 'sex' => 'm'),
+	    array('message' => 'Водитель скорой помощи', 'sex' => 'm'),
+	    array('message' => 'Селянин', 'sex' => 'm'),
+	    array('message' => 'Депутат Братска', 'sex' => 'm'),
+	    array('message' => 'Омич, стрелявший в прохожих из окна', 'sex' => 'm'),
+	    array('message' => 'Водитель буксира в Петербурге', 'sex' => 'm'),
+	    array('message' => 'Доярка из Амурской области', 'sex' => 'f'),
+	    array('message' => 'Журналистка Комсомольской правды', 'sex' => 'f'),
+	    array('message' => 'Уборщица ночного клуба', 'sex' => 'f'),
+	    array('message' => 'Полицейские из Омска', 'sex' => 'plural'),
+	    array('message' => 'Группа Томичей', 'sex' => 'plural'),
+	    array('message' => '{Две|Три|Четыре} проститутки из подмосковья', 'sex' => 'plural'),
+	    array('message' => '{Два|Три|Четыре} студента филфака МГУ', 'sex' => 'plural'),
+	    array('message' => 'Группа молодых людей из Бурятии', 'sex' => 'plural'),
+	    array('message' => 'Омичи', 'sex' => 'plural'),
+	    array('message' => 'В Волгограде двое Чеченцев', 'sex' => 'plural'),
+	    array('message' => 'В Казахстане {четыре|две|три} студентки', 'sex' => 'plural'),
+	    array('message' => 'Двое жителей Ставрополья', 'sex' => 'plural'),
+	  );
+	  
     $this->seed = array_rand($this->predict);
     $this->sex = $this->predict[$this->seed]['sex'];
+
   }
   
   /**
