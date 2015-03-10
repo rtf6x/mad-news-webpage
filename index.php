@@ -5,9 +5,9 @@ class MadNews {
   private $seed;
 
   private $predict = array(
-    array('message' => 'Водитель камаза', 'sex' => 'm'),
+    array('message' => 'Водитель {камаза|белаза|мусоровоза}', 'sex' => 'm'),
     array('message' => 'Житель Владимирской области', 'sex' => 'm'),
-    array('message' => 'Житель Хабаровска', 'sex' => 'm'),
+    array('message' => 'Житель {Хабаровска|Бобруйска|Мурманска|Калининграда}', 'sex' => 'm'),
     array('message' => 'Мужчина из Саратова', 'sex' => 'm'),
     array('message' => 'Череповчанин', 'sex' => 'm'),
     array('message' => 'Мужчина в Челябинске', 'sex' => 'm'),
@@ -25,11 +25,9 @@ class MadNews {
     array('message' => 'Депутат Братска', 'sex' => 'm'),
     array('message' => 'Омич, стрелявший в прохожих из окна', 'sex' => 'm'),
     array('message' => 'Водитель буксира в Петербурге', 'sex' => 'm'),
-
     array('message' => 'Доярка из Амурской области', 'sex' => 'f'),
     array('message' => 'Журналистка Комсомольской правды', 'sex' => 'f'),
     array('message' => 'Уборщица ночного клуба', 'sex' => 'f'),
-
     array('message' => 'Полицейские из Омска', 'sex' => 'plural'),
     array('message' => 'Группа Томичей', 'sex' => 'plural'),
     array('message' => 'Две проститутки из подмосковья', 'sex' => 'plural'),
@@ -129,7 +127,7 @@ class MadNews {
       'и требовал аудиенции с Путиным',
       'и пел матерные частушки',
       'и выиграл в лотерею',
-      'и случайно убил соседа',
+      'и случайно убил {соседа|прохожего|козу}',
       'и был задержан за мошенничество',
       'ЧТОБЫ СОГРЕТЬСЯ',
       'чтобы вернуть жену',
@@ -144,7 +142,7 @@ class MadNews {
       'и требовала аудиенции с Путиным',
       'и материлась невпопад',
       'и выиграла в лотерею',
-      'и случайно убила соседа',
+      'и случайно убила {соседа|прохожего|козу}',
       'ЧТОБЫ СОГРЕТЬСЯ',
       'чтобы вернуть мужа',
       'чтобы войти в книгу рекордов Гинесса',
@@ -158,7 +156,7 @@ class MadNews {
       'И ЕДВА НЕ ЛИШИЛись конечностей',
       'и требовали аудиенции с Путиным',
       'и пели матерные частушки',
-      'и случайно убили соседа',
+      'и случайно убили {соседа|прохожего|козу}',
       'ЧТОБЫ СОГРЕТЬСЯ',
       'чтобы войти в книгу рекордов Гинесса',
       'чтобы их оставили в покое',
@@ -169,11 +167,11 @@ class MadNews {
   public function getNew($stage) {
     switch ($stage) {
       case 1:
-        return mb_strtoupper($this->predict[$this->seed]['message'], 'utf-8');
+        return mb_strtoupper($this->multiply($this->predict[$this->seed]['message']), 'utf-8');
       case 2:
-        return mb_strtoupper($this->action[$this->sex][array_rand($this->action[$this->sex])], 'utf-8');
+        return mb_strtoupper($this->multiply($this->action[$this->sex][array_rand($this->action[$this->sex])]), 'utf-8');
       case 3:
-        return mb_strtoupper($this->conclusion[$this->sex][array_rand($this->conclusion[$this->sex])], 'utf-8');
+        return mb_strtoupper($this->multiply($this->conclusion[$this->sex][array_rand($this->conclusion[$this->sex])]), 'utf-8');
       default:
         return 'И УМЕР';
     }
@@ -182,6 +180,23 @@ class MadNews {
   public function __construct() {
     $this->seed = array_rand($this->predict);
     $this->sex = $this->predict[$this->seed]['sex'];
+  }
+  
+  /**
+   * Обработка шаблона размножения. 
+   * Шаблон: "Именно {образование|обучение|учение} закладывает в {человека|людей|толпу} {знания|багаж знаний|запас знаний} и информацию."
+   * Результат: "Именно обучение закладывает в людей знания и информацию."
+   *
+   */
+  private function multiply($template) {
+  	$content = $template;
+		preg_match_all('#{(.*)}#Ui', $content, $matches);
+		foreach($matches[1] as $set) {
+			$words = explode('|', $set);
+			$rand = rand(0, (sizeof($words) - 1));
+			$content = str_replace('{' . $set . '}', $words[$rand], $content);
+		}
+		return $content;
   }
 }
 
