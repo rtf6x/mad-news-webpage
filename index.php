@@ -4,8 +4,11 @@ class MadNews {
   private $sex;
   private $seed;
 
-	private $place_genitive = '{Ярославской области|Кузбасса|Саратова|Иваново|Ульяновска|Бурятии|Владимирской области|Хабаровска|Бобруйска|Мурманска|Калининграда}';
-
+	private $SARATOVA = '{Ярославской области|Кузбасса|Саратова|Иваново|Ульяновска|Бурятии|Владимирской области|Хабаровска|Бобруйска|Мурманска|Калининграда}';
+  private $V_KRASNODARE = "В {Краснодаре|Казани|Киргизстане|Узбекистане|Ташкенте|Баку|Новосибирске|Чите|Челябинске}";
+  private $PENSIONER = "{парень|молодой человек|пенсионер|житель коттеджного посёлка|ветеран ВОВ|рыбак|мальчик|пожилой учитель|социальный работник|священник|нищий|полицейский|программист|охотник|дворник|мормон|сантехник|наркоман}";
+  private $DEVUSHKA = "{девушка|женщина|пенсионерка|писательница|пьяная продавщица|учительница|посетительница салона красоты|женщина лёгкого поведения}";
+  private $STRELYAVSHiY_V_PROKHOZHYKH_IZ_OKNA = "{стрелявший в прохожих из окна|}";
   private $predict;
 
   private $action = array(
@@ -37,6 +40,9 @@ class MadNews {
       'угнал бетономешалку',
       'угнал танк-экспонат времен ВОВ',
       'напоил кота самогонкой',
+      'купил аккордеон',
+      'провёл ночь в гнезде аиста',
+      'обнаружил в подвале скелет в спортивных',
     ),
     'f' => array(
       'ХОТЕЛа НАПУГАТЬ мужа',
@@ -60,7 +66,7 @@ class MadNews {
       'не пустила мужа на рыбалку',
       'готовила ужин',
       'фотографировала льва в местном цирке',
-      'совершила ДТП с трактором',
+      'совершила ДТП с трактором',      
     ),
     'plural' => array(
       'УГНАЛи ПОЕЗД',
@@ -103,6 +109,10 @@ class MadNews {
       'чтобы войти в книгу рекордов Гинесса',
       'чтобы его оставили в покое',
       'чтобы замести следы изготовления самогона',
+      'и прострелил бицепцы гостю ресторана "Всё хорошо"',
+      'чтобы успокоить морских гребешков',
+      'чтобы уладить конфликт с дагестанцами',
+      'чтобы защитить свою честь',
     ),
     'f' => array(
       'И ПРИ ЭТОМ СМЕЯЛась',
@@ -147,27 +157,38 @@ class MadNews {
   }
 
   public function __construct() {
+
+
     $this->predict = array(
 	    array('message' => 'Водитель {камаза|белаза|мусоровоза}', 'sex' => 'm'),
-	    array('message' => 'Житель ' . $this->place_genitive, 'sex' => 'm'),
-	    array('message' => 'Мужчина из ' . $this->place_genitive, 'sex' => 'm'),
+	    array('message' => 'Житель ' . $this->SARATOVA, 'sex' => 'm'),
+	    array('message' => 'Мужчина из ' . $this->SARATOVA, 'sex' => 'm'),
 	    array('message' => 'Череповчанин', 'sex' => 'm'),
 	    array('message' => 'Мужчина в Челябинске', 'sex' => 'm'),
 	    array('message' => 'Кемеровчанин', 'sex' => 'm'),
 	    array('message' => 'Председатель колхоза', 'sex' => 'm'),
 	    array('message' => 'Водитель мусоровоза', 'sex' => 'm'),
-	    array('message' => 'Сантехник из ' . $this->place_genitive, 'sex' => 'm'),
-	    array('message' => 'Наркоман из ' . $this->place_genitive, 'sex' => 'm'),
-	    array('message' => 'Пенсионер', 'sex' => 'm'),
-	    array('message' => 'Пивовар из ' . $this->place_genitive, 'sex' => 'm'),
+	    array('message' => 'Сантехник из ' . $this->SARATOVA, 'sex' => 'm'),
+	    array('message' => 'Наркоман из ' . $this->SARATOVA, 'sex' => 'm'),
+	    array('message' => $this->PENSIONER, 'sex' => 'm'),
+	    array('message' => 'Пивовар из ' . $this->SARATOVA, 'sex' => 'm'),
 	    array('message' => 'Водитель скорой помощи', 'sex' => 'm'),
 	    array('message' => 'Селянин', 'sex' => 'm'),
 	    array('message' => 'Депутат Братска', 'sex' => 'm'),
 	    array('message' => 'Омич, стрелявший в прохожих из окна', 'sex' => 'm'),
 	    array('message' => 'Водитель буксира в Петербурге', 'sex' => 'm'),
+      array('message' => 'Молодой человек', 'sex' => 'm'),
+      array('message' => $this->V_KRASNODARE.' '.$this->PENSIONER, 'sex' => 'm'),
+      array('message' => $this->PENSIONER.' из '.$this->SARATOVA, 'sex' => 'm'),
+
+      array('message' => 'Воспитательница из Сочи, ', 'sex' => 'f'),
 	    array('message' => 'Доярка из Амурской области', 'sex' => 'f'),
 	    array('message' => 'Журналистка Комсомольской правды', 'sex' => 'f'),
 	    array('message' => 'Уборщица ночного клуба', 'sex' => 'f'),
+      array('message' => 'Жительница ' . $this->SARATOVA, 'sex' => 'f'),
+      array('message' => 'Уроженка ' . $this->SARATOVA, 'sex' => 'f'),
+      array('message' => $this->V_KRASNODARE.' '.$this->DEVUSHKA, 'sex' => 'f'),
+
 	    array('message' => 'Полицейские из Омска', 'sex' => 'plural'),
 	    array('message' => 'Группа Томичей', 'sex' => 'plural'),
 	    array('message' => '{Две|Три|Четыре} проститутки из подмосковья', 'sex' => 'plural'),
