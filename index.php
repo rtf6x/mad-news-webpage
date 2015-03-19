@@ -192,6 +192,7 @@ class MadNews {
       array('message' => 'Уроженка ' . $this->SARATOVA, 'sex' => 'f'),
       array('message' => $this->V_KRASNODARE.' '.$this->DEVUSHKA, 'sex' => 'f'),
 
+      array('message' => 'Голодные жители Зимбабве', 'sex' => 'plural'),
 	    array('message' => 'Полицейские из Омска', 'sex' => 'plural'),
 	    array('message' => 'Группа Томичей', 'sex' => 'plural'),
 	    array('message' => '{Две|Три|Четыре} проститутки из подмосковья', 'sex' => 'plural'),
