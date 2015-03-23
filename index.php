@@ -138,7 +138,6 @@ class MadNews {
       |льва из местного цирка
       |деньги дольщиков
       |из дома модем и сигареты
-      |у бывшей супруги пятилетнего сына
       |теленка
       |у калужских селян более сотни коров
     }',
@@ -187,7 +186,7 @@ class MadNews {
       'зашел в строительную фирму',
       'с огнетушителем в руках напал на прохожего',
       'ограбил супругов, приютивших его на ночь',
-      'утопил знакомую в ванной и поджег ее квартиру',
+      'утопил знакомую в ванной',
       'пытался провезти свою супругу в Польшу, спрятав в чемодане',
       'ранил ножом двоих полицейских в Петербурге',
       'изнасиловал риэлтора',
@@ -262,6 +261,7 @@ class MadNews {
       'и пел матерные частушки',
       'и выиграл в лотерею',
       'и случайно убил [СОСЕДА]',
+      'и поджег ее квартиру',
       'и украл кошелек с деньгами',
       'и был задержан за мошенничество',
       'и был уволен',
@@ -292,6 +292,7 @@ class MadNews {
       'чтобы её не заподозрили в измене',
       'с особой жестокостью',
       'спасая своего любимца',
+      'и скрывается от правосудия',
     ),
     'plural' => array(
       'И ПРИ ЭТОМ СМЕЯЛись',
@@ -310,6 +311,10 @@ class MadNews {
       'спасая своего любимца',
       'и устроили стрельбу из пневматического пистолета',
       'и прострелили ноги преступнику с ножом',
+      'и скрываются от правосудия',
+      'в неадекватном состоянии',
+      'угрожая оружием',
+      'на кладбище',
     ),
   );
 
@@ -334,10 +339,17 @@ class MadNews {
     foreach($ar as $template) {
       $result = array_merge($result, $this->extract_sentense($template));
     }
-    return $result;
+
+    return array_unique($result);
   }
 
   function extract_sentense($content) {
+    if (preg_match_all('/\[(.*)\]/Ui', $content, $matches)) {
+      foreach($matches[1] as $code) {
+        $content = trim(str_replace('[' . $code . ']', $this->sets[$code], $content));
+      }  
+    }
+
     while (preg_match('/{(.*)}/Uis', $content, $matches)) {
       $set = $matches[1];
       $words = explode('|', $set);
@@ -347,6 +359,7 @@ class MadNews {
       }
       $content = implode('@@@',$results);       
     }
+
     return explode('@@@', $content);
   }
 
@@ -389,7 +402,8 @@ class MadNews {
       array('message' => 'неизвестные без оружия', 'sex' => 'plural'),
       
 	  );
-	  
+
+    $predict = array_map(create_function('$item', 'return $item["message"];'), $this->predict);
     $this->seed = array_rand($this->predict);
     $this->sex = $this->predict[$this->seed]['sex'];
 
@@ -411,7 +425,7 @@ class MadNews {
 		foreach($matches[1] as $set) {
 			$words = explode('|', $set);
 			$rand = rand(0, (sizeof($words) - 1));
-			$content = str_replace('{' . $set . '}', trim($words[$rand]), $content);
+			$content = trim(str_replace('{' . $set . '}', trim($words[$rand]), $content));
 		}
 		return $content;
   }
