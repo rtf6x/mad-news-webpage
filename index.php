@@ -431,9 +431,66 @@ class MadNews {
   }
 }
 
-$mad = new MadNews();
 
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+/**
+* Получить входной параметр в скрипт
+*/
+function param($name) {
+  global $argv;
+
+  $args = array();
+  foreach($argv as $arg) {
+    if (preg_match('/^([^:]+):([^:]+)$/', $arg, $matches)) {
+      $args[$matches[1]] = $matches[2];
+    }
+  }
+
+  if ($name == 'mode') {
+    if (isset($_GET['mode']))
+      return $_GET['mode'];
+
+    if (isset($args['mode']))
+      return $args['mode']; 
+
+    return 'html';   
+  }
+  if ($name == 'count') {
+
+    if (isset($_GET['count']) && is_numeric($_GET['count']))
+      return intval($_GET['count']);
+
+    if (isset($args['count']))
+      return $args['count']; 
+
+    return 10000;
+  }
+}
+/*
+function getmode() {
+  if (isset($_GET['mode']))
+    return $_GET['mode'];
+
+  global $argv;
+
+  if (isset($argv[1]))
+    return $argv[1];
+
+}
+*/
+
+// вывод в разных форматах в зависимости от переданных параметров
+if (param('mode') == 'plain') {
+  $count = param('count');
+  for($i = 0; $i < $count; $i++) {
+    $mad = new MadNews();
+    print $mad->getNew(1) . ' ' . $mad->getNew(2) . ' ' . $mad->getNew(3) . PHP_EOL;
+  }
+}
+else {
+  $mad = new MadNews();
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html><head>
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
   <title>MAD News - Только драма</title>
@@ -463,3 +520,6 @@ $mad = new MadNews();
 ?>
 </pre>
 </body></html>
+<?php } ?>
+
+
