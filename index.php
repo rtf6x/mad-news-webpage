@@ -458,9 +458,9 @@ $mad = new MadNews();
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
   <title>MAD News - Только драма</title>
   <meta content="article" property="og:type">
-  <meta content="http://strangefoxes.ru/madnews/" property="og:url">
+  <meta content="http://madnews.rootfox.cc/" property="og:url">
   <meta content="MAD News - Только драма" property="og:title">
-  <meta content="Генератор самых драматических новостей в мире Breaking Mad. Сенсационные факты о Российской глубинке!" property="og:description">
+  <meta content="Генератор самых драматических новостей. Сенсационные факты о Российской глубинке!" property="og:description">
   <link href="style.css" rel="stylesheet" type="text/css">
 
 </head>
@@ -472,7 +472,7 @@ $mad = new MadNews();
     <div id="stage_a0" class="stage"><p><?php print $mad->getNew(1); ?></p></div>
     <div id="stage_b0" class="stage"><p><?php print $mad->getNew(2); ?></p></div>
     <div id="stage_c0" class="stage"><p><?php print $mad->getNew(3); ?></p></div>
-    <div id="stage_refresh" class="stage"><a href="/madnews/"></a></div>
+    <div id="stage_refresh" class="stage"><a href="/"></a></div>
 
   </div>
 </div>
