@@ -462,9 +462,16 @@ $mad = new MadNews();
   <meta content="MAD News - Только драма" property="og:title">
   <meta content="Генератор самых драматических новостей. Сенсационные факты о Российской глубинке!" property="og:description">
   <link href="style.css" rel="stylesheet" type="text/css">
+  <link href="fork.min.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
+
+<div class="fork-me fork-me-dark fork-me-fixed" style="z-index: 20000000; background: #000;">
+    <a class="fork-me-link" target="_blank" href="https://github.com/Trapholov/MadNews">
+        <span class="fork-me-text">Fork Me On GitHub</span>
+    </a>
+</div>
 
 <div class="center-wrapper">
   <div id="stage">
