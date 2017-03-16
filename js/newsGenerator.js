@@ -276,16 +276,19 @@ function MadNews() {
   function multiply(template) {
     var content = template || '';
     var matches = content.match(/\[[а-яА-Я\w]*\]/g);
-    if (!matches) return content;
-    matches.forEach(function (match) {
-      content = content.replace(match, sets[match.substr(1).substr(0, match.length - 2)]);
-    });
+    if (matches) {
+      matches.forEach(function (match) {
+        content = content.replace(match, sets[match.substr(1).substr(0, match.length - 2)]);
+      });
+    }
     matches = content.match(/\{([А-Яа-яЁё|\s\-\d]*)\}/g);
-    matches.forEach(function (set) {
-      set = set.substr(1).substr(0, set.length - 2);
-      var words = set.split('|');
-      content = content.replace('{' + set + '}', words[Math.floor(Math.random() * words.length)].trim()).trim();
-    });
+    if (matches) {
+      matches.forEach(function (set) {
+        set = set.substr(1).substr(0, set.length - 2);
+        var words = set.split('|');
+        content = content.replace('{' + set + '}', words[Math.floor(Math.random() * words.length)].trim()).trim();
+      });
+    }
     return content;
   }
 
@@ -297,7 +300,7 @@ function MadNews() {
 
   function extract_sentense(content) {
     var matches = content.match(/\[[а-яА-Я\w]*\]/g);
-    if (matches){
+    if (matches) {
       matches.forEach(function (code) {
         code = code.substr(1).substr(0, code.length - 2);
         content = content.replace('[' + code + ']', sets[code]).trim();
