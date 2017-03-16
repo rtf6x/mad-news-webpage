@@ -322,7 +322,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   document.querySelector("#stage_a0 p").innerText = madness.getNew(1);
   document.querySelector("#stage_b0 p").innerText = madness.getNew(2);
   document.querySelector("#stage_c0 p").innerText = madness.getNew(3);
-  document.querySelector("#stage_refresh").addEventListener("click", function (e) {
+  document.querySelector("#stage_refresh a").addEventListener("click", function (e) {
     madness = new MadNews();
     document.querySelector("#stage_a0 p").innerText = madness.getNew(1);
     document.querySelector("#stage_b0 p").innerText = madness.getNew(2);
