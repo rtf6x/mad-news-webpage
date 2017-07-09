@@ -1,4 +1,4 @@
 # MadNews
 Генератор драматических новостей
 
-http://strangefoxes.ru/madnews/
+http://madnews.rootfox.cc/
