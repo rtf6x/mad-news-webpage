@@ -25,10 +25,6 @@
 .touch .video-container video {
     display: none;
 }
-.video-container .canvas {
-    min-width: 100vw;
-    min-height: 100vh;
-}
 .no-video .video-container .poster,
 .touch .video-container .poster {
     display: block !important;
