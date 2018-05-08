@@ -16,6 +16,8 @@
     height: 100vh;
     width: 100vw;
     overflow: hidden;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
 }
 .no-video .video-container video,
 .touch .video-container video {
@@ -33,6 +35,8 @@
     width: 100%;
     overflow: hidden;
     background: #000;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
 }
 .video-container .poster img {
     width: 100%;
