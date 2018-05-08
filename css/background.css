@@ -54,7 +54,8 @@
 .video-container video {
     position: absolute;
     z-index: 0;
-    bottom: 0;
+    top: 0;
+    min-height: 100vh;
 }
 .video-container video.fillWidth {
     width: 100%;
