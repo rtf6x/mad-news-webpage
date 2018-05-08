@@ -4,7 +4,7 @@ body {
 }
 
 .fork-me {
-    z-index: 200;
+    z-index: 20000;
 }
 
 .center-wrapper {
@@ -12,7 +12,7 @@ body {
     right: 0;
     width: 60%;
     bottom: 15%;
-    z-index: 100;
+    z-index: 100000;
 }
 
 .stage {
