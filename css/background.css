@@ -58,5 +58,5 @@
     min-height: 100vh;
 }
 .video-container video.fillWidth {
-    width: 100%;
+    min-width: 100%;
 }
