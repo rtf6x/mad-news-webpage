@@ -1,6 +1,6 @@
 # MadNews
-Генератор драматических новостей
+Dramatic news generator
 
-http://madnews.rootfox.cc/
+[http://madnews.rootfox.cc/](https://rootfox.cc/funny/mad-news/)
 
-По мотивам http://breakingmad.me
+Based on http://breakingmad.me
